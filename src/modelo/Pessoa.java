@@ -1,7 +1,8 @@
-package model;
+package modelo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import model.Endereco;
+import modelo.Endereco;
 
 @Entity
 public class Pessoa {
@@ -21,12 +22,14 @@ public class Pessoa {
 	private String telefone;
 	private String celular;
 	
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
+	private String dataNascimento;
 	
-	@OneToOne
-	private Endereco endereco = new Endereco();
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
 	
+	public Pessoa() {
+	}
+
 	public String getNomeCompleto() {
 		return this.primeiroNome + this.sobrenome;
 	}
@@ -63,11 +66,11 @@ public class Pessoa {
 		this.celular = celular;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

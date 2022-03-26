@@ -1,8 +1,9 @@
-package model;
+package modelo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco {
@@ -15,6 +16,12 @@ public class Endereco {
 	private String cep;
 	private String cidade;
 	
+	@OneToOne(mappedBy = "endereco")
+	private Pessoa pessoa;
+	
+	public Endereco() {
+		
+	}
 	
 	
 	public String getRua() {
@@ -52,5 +59,15 @@ public class Endereco {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 }

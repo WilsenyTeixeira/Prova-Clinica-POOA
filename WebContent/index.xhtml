@@ -1,0 +1,99 @@
+<ui:composition
+	template="WEB-INF/template/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+                  xmlns:p="http://java.sun.com/jsf/html"
+                  xmlns:h="http://java.sun.com/jsf/html">
+	
+	<ui:define name="content">
+	<style type="text/css">
+		#cadastrar {
+			margin-top: 25px;
+			width: 45vw;
+		}
+		
+		#cad {
+			display: flex;
+		}
+		
+		.medico {
+			display: flex;
+			flex-direction: column;
+			width: 50%;
+		}
+		
+		.endereco {
+			display: flex;
+			flex-direction: column;
+			width: 50%;
+		}
+		
+		.content {
+		display: flex;
+		}
+	</style>
+	<div class="content">
+		<div id="cadastrar">
+			<h:form id="cad">
+				<div class="medico">
+					<p:outputLabel  value="Nome:"/>
+					<p:inputText value="#{medicoBean.medico.primeiroNome}"/>
+				
+					<p:outputLabel  value="Sobrenome:"/>
+					<p:inputText value="#{medicoBean.medico.sobrenome}"/>
+				
+					<p:outputLabel  value="Telefone:"/>
+					<p:inputText value="#{medicoBean.medico.telefone}"/>
+				
+					<p:outputLabel  value="Celular:"/>				   
+					<p:inputText value="#{medicoBean.medico.celular}"/>
+			
+					<p:outputLabel  value="Nascimento:"/>		   
+					<p:inputText value="#{medicoBean.medico.dataNascimento}"/>
+					
+					<p:outputLabel  value="CRM:"/>				  
+					<p:inputText value="#{medicoBean.medico.crm}"/>
+			
+					<p:outputLabel  value="Especialidade:"/>				   
+					<p:inputText value="#{medicoBean.medico.especialidade}"/>
+				</div>
+				<div class="endereco">
+					<p:outputLabel  value="Rua:"/>				   
+					<p:inputText value="#{medicoBean.medico.endereco.rua}"/>
+					
+					<p:outputLabel  value="Bairro:"/>				   
+					<p:inputText value="#{medicoBean.medico.endereco.bairro}"/>
+					
+					<p:outputLabel  value="Numero:"/>				   
+					<p:inputText value="#{medicoBean.medico.endereco.numero}"/>
+					
+					<p:outputLabel  value="CEP:"/>				   
+					<p:inputText value="#{medicoBean.medico.endereco.cep}"/>
+					
+					<p:outputLabel  value="Cidade:"/>				   
+					<p:inputText value="#{medicoBean.medico.endereco.cidade}"/>
+				</div>
+				<p:commandButton type="button" value="Cadastrar"
+				action="#{medicoBean.gravarMedico()}"
+				update="@form, :listMedicos" process="@form" />
+			</h:form>
+		</div>
+		
+		<div id="listar">
+		<h:form id="listMedicos">
+			<p:dataTable value="#{medicoBean.medicos}" var="medicoAtual" border="1">
+				<p:column headerText="Nome Completo">
+					<h:outputText value="#{medicoAtual.nomeCompleto}"/>
+				</p:column>
+				<p:column headerText="CRM">
+					<h:outputText value="#{medicoAtual.crm}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		</div>
+	</div>
+		
+	</ui:define>
+</ui:composition>
+
